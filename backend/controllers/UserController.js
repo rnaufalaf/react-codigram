@@ -1,4 +1,6 @@
 const { User } = require("../models");
+const { decrypt } = require("../helpers/bcrypt");
+const { tokenGenerator } = require("../helpers/jsonwebtoken");
 
 class UserController {
   static async registerUser(req, res) {
@@ -14,22 +16,27 @@ class UserController {
       });
       res.status(201).json(result);
     } catch (err) {
-      res.status(500).json(err);
+      res.status(500).json({ message: "Register user failed", err });
     }
   }
   static async login(req, res) {
     const { email, password } = req.body;
     try {
       let emailFound = await User.findOne({
-        where: { email: email, password: password },
+        where: { email: email },
       });
       if (emailFound) {
-        res.status(200).json(emailFound);
+        const accessToken = tokenGenerator(emailFound);
+        if (decrypt(password, emailFound.password)) {
+          res.status(200).json({ accessToken });
+        }
       } else {
-        res.status(200).json({ message: "User has not been registered" });
+        res.status(404).json({
+          message: `User with an email of ${email} has not been registered`,
+        });
       }
     } catch (err) {
-      res.status(500).json(err);
+      res.status(500).json({ message: "Login failed", err });
     }
   }
   static async getUser(req, res) {
@@ -38,15 +45,13 @@ class UserController {
       let user = await User.findOne({
         where: { id: id },
       });
-      if (user) {
-        res.status(200).json(user);
-      } else {
-        res
-          .status(200)
-          .json({ message: `User with an id of ${id} was not found` });
-      }
+      user !== null
+        ? res.status(200).json(user)
+        : res
+            .status(404)
+            .json({ message: `User with and id of ${id}not found` });
     } catch (err) {
-      res.status(500).json(err);
+      res.status(500).json({ message: "Get user failed", err });
     }
   }
   static async editUser(req, res) {
@@ -55,11 +60,17 @@ class UserController {
     try {
       let result = await User.update(
         { email, username, password, phone, country, image },
-        { where: { id: id } }
+        { where: { id: id }, individualHooks: true }
       );
-      res.status(204).json(result);
+      result[0] === 1
+        ? res.status(200).json({
+            message: `User with an id of ${id} has been updated successfully`,
+          })
+        : res
+            .status(404)
+            .json({ message: `User with an id of ${id} not found` });
     } catch (err) {
-      res.status(500).json(err);
+      res.status(500).json({ message: "Update user failed", err });
     }
   }
 }

@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const { encrypt } = require("../helpers/bcrypt");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -13,14 +14,33 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init(
     {
-      email: { type: DataTypes.STRING, allowNull: false },
-      username: { type: DataTypes.STRING, allowNull: false },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: { isEmail: true },
+      },
+      username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: { len: [6, 20] },
+      },
       password: { type: DataTypes.STRING, allowNull: false },
-      phone: { type: DataTypes.STRING, allowNull: false },
+      phone: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [10, 12],
+        },
+      },
       country: { type: DataTypes.STRING, allowNull: false },
       image: { type: DataTypes.STRING, allowNull: true },
     },
     {
+      hooks: {
+        beforeCreate: (user, options) => {
+          user.password = encrypt(user.password);
+        },
+      },
       sequelize,
       modelName: "User",
     }
