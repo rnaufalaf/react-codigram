@@ -7,14 +7,12 @@ import { LoginPage, RegisterPage, HomePage } from "./pages";
 
 function App() {
   return (
-    <div className="container">
-      <Routes>
-        <Route path="/" element={<Navigate replace to="/login" />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/home/*" element={<HomePage />} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/" element={<Navigate replace to="/login" />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/home/*" element={<HomePage />} />
+    </Routes>
   );
 }
 

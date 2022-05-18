@@ -54,6 +54,14 @@ class UserController {
       res.status(500).json({ message: "Get user failed", err });
     }
   }
+  static async getUsers(req, res) {
+    try {
+      let users = await User.findAll();
+      res.status(200).json(users);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
   static async editUser(req, res) {
     const id = req.userData.id;
     const { email, username, password, phone, country, image } = req.body;

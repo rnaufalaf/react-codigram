@@ -8,6 +8,96 @@ h2.header-title {
   font-weight: semibold;
 }
 
+h1.app-title {
+  font-family: "Pacifico", cursive;
+  color: white;
+  padding-top: 8rem;
+}
+
 div.header-menu {
   font-family: "Quicksand", sans-serif;
+}
+
+div.login-container {
+  height: 100vh;
+  width: 100vw;
+  background-image: url("https://images.pexels.com/photos/5483077/pexels-photo-5483077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: "Quicksand", sans-serif;
+}
+
+div.login-form-container {
+  position: absolute;
+  height: 100vh;
+  width: 50vw;
+  background-color: white;
+}
+
+div.login-form-content {
+  padding-top: 20vh;
+}
+
+button.login-button {
+  padding: 10px;
+  background-color: #0d6efd;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+
+button.login-button:hover {
+  background-color: rgb(34, 107, 180);
+}
+
+button.redirect-register {
+  color: #0d6efd;
+  background-color: white;
+  border: 0;
+  font-weight: bold;
+}
+
+button.redirect-register:hover {
+  color: rgb(34, 107, 180);
+}
+
+div.register-container {
+  height: 100vh;
+  width: 100vw;
+  background-image: url("https://images.pexels.com/photos/5483077/pexels-photo-5483077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: "Quicksand", sans-serif;
+}
+
+div.register-form-container {
+  position: static;
+  height: 100vh;
+  width: 50vw;
+  background-color: white;
+}
+
+button.register-button {
+  padding: 10px;
+  background-color: #0d6efd;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+
+button.register-button:hover {
+  background-color: rgb(34, 107, 180);
+}
+
+button.redirect-login {
+  color: #0d6efd;
+  background-color: white;
+  border: 0;
+  font-weight: bold;
+}
+
+button.redirect-login:hover {
+  color: rgb(34, 107, 180);
 }

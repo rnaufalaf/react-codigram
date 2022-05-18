@@ -5,7 +5,7 @@ import "../App.css";
 const Header = () => {
   return (
     <div>
-      <nav class="navbar navbar-expand-lg bg-success">
+      <nav class="navbar navbar-expand-lg bg-primary">
         <div class="container-fluid">
           <h2 class="header-title text-white" href="#">
             Codigram
@@ -28,7 +28,7 @@ const Header = () => {
               placeholder="Search"
               aria-label="Search"
             />
-            <button class="btn btn-success border border-light" type="submit">
+            <button class="btn btn-primary border border-light" type="submit">
               <BsSearch />
             </button>
           </form>
@@ -45,7 +45,7 @@ const Header = () => {
                 </a>
               </li>
               <li class="nav-item px-4">
-                <button class="btn btn-success">Logout</button>
+                <button class="btn btn-primary">Logout</button>
               </li>
             </ul>
           </div>
