@@ -40,7 +40,7 @@ class UserController {
     }
   }
   static async getUser(req, res) {
-    const id = Number(req.params.id);
+    const id = req.userData.id;
     try {
       let user = await User.findOne({
         where: { id: id },
@@ -55,7 +55,7 @@ class UserController {
     }
   }
   static async editUser(req, res) {
-    const id = Number(req.params.id);
+    const id = req.userData.id;
     const { email, username, password, phone, country, image } = req.body;
     try {
       let result = await User.update(
@@ -64,13 +64,13 @@ class UserController {
       );
       result[0] === 1
         ? res.status(200).json({
-            message: `User with an id of ${id} has been updated successfully`,
+            message: `User with an id of ${id} has been edit successfully`,
           })
         : res
             .status(404)
             .json({ message: `User with an id of ${id} not found` });
     } catch (err) {
-      res.status(500).json({ message: "Update user failed", err });
+      res.status(500).json({ message: "Edit user failed", err });
     }
   }
 }

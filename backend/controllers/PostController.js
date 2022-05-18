@@ -29,7 +29,7 @@ class PostController {
     }
   }
   static async getPostsByUserId(req, res) {
-    const userId = Number(req.params.id);
+    const userId = req.userData.id;
     try {
       let postsById = await Post.findAll({ where: { id: userId } });
       if (postsById) {
@@ -44,7 +44,8 @@ class PostController {
     }
   }
   static async createPost(req, res) {
-    const { title, image, content, UserId } = req.body;
+    const UserId = req.userData.id;
+    const { title, image, content } = req.body;
     try {
       let result = await Post.create({ title, image, content, UserId });
       res.status(200).json(result);
@@ -53,25 +54,39 @@ class PostController {
     }
   }
   static async editPost(req, res) {
+    const UserId = req.userData.id;
     const id = Number(req.params.id);
     const { title, image, content } = req.body;
     try {
       let result = await Post.update(
         { title, image, content },
-        { where: { id: id } }
+        { where: { id: id, UserId: UserId } }
       );
-      res.status(204).json(result);
+      result[0] === 1
+        ? res.status(200).json({
+            message: `Post with an id of ${id} has been edited successfully`,
+          })
+        : res
+            .status(404)
+            .json({ message: `Post with an id of ${id} not found` });
     } catch (err) {
-      res.status(500).json(err);
+      res.status(500).json({ message: "Edit post failed", err });
     }
   }
   static async deletePost(req, res) {
     const id = Number(req.params.id);
+    const UserId = req.userData.id;
     try {
-      let result = await Post.destroy({ where: { id: id } });
-      res.status(204).json(result);
+      let result = await Post.destroy({ where: { id: id, UserId: UserId } });
+      result === 1
+        ? res.status(200).json({
+            message: `Post with an id of ${id} has been delete successfully`,
+          })
+        : res
+            .status(404)
+            .json({ message: `Post with an id of ${id} not found` });
     } catch (err) {
-      res.status(500).json(err);
+      res.status(500).json({ message: "Delete post failed", err });
     }
   }
 }

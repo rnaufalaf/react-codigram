@@ -40,6 +40,9 @@ module.exports = (sequelize, DataTypes) => {
         beforeCreate: (user, options) => {
           user.password = encrypt(user.password);
         },
+        beforeUpdate: (user, options) => {
+          user.password = encrypt(user.password);
+        },
       },
       sequelize,
       modelName: "User",
