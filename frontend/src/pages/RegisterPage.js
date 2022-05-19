@@ -46,7 +46,11 @@ const RegisterPage = () => {
                 <input type="text" class="form-control" id="country" />
               </div>
               <div align="center">
-                <button type="submit" class="login-button">
+                <button
+                  type="button"
+                  class="login-button"
+                  onClick={() => navigate("/login")}
+                >
                   Submit
                 </button>
                 <p class="py-3">

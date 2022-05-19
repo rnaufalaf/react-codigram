@@ -1,7 +1,7 @@
 import React from "react";
 import { PostCard } from "../components";
 
-const PostsPage = () => {
+const SearchedPostsPage = () => {
   const dummyPost = [
     {
       title: "JavaScript for dummies",
@@ -60,7 +60,7 @@ const PostsPage = () => {
   ];
   return (
     <div class="px-5 py-4">
-      <h5 align="center">Timeline</h5>
+      <h5 align="center">Search Results</h5>
       <div class="row">
         {dummyPost.map((post) => {
           return <PostCard post={post} />;
@@ -70,4 +70,4 @@ const PostsPage = () => {
   );
 };
 
-export default PostsPage;
+export default SearchedPostsPage;

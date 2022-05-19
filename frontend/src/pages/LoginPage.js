@@ -7,10 +7,6 @@ const LoginPage = () => {
   const navigate = useNavigate();
   return (
     <div class="login-container">
-      {/* <div align="center">
-        <h1 class="app-title">Codigram</h1>
-        <h6>A Social Media for Developers</h6>
-      </div> */}
       <div class="row">
         <div class="col">
           <div class="login-form-container">
@@ -34,7 +30,7 @@ const LoginPage = () => {
                 </div>
                 <div align="center">
                   <button
-                    type="submit"
+                    type="button"
                     class="login-button"
                     onClick={() => navigate("/home/posts")}
                   >

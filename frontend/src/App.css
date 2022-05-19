@@ -1,11 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
 
-h2.header-title {
+button.header-title {
   margin-top: 0.5rem;
   font-family: "Pacifico", cursive;
   font-size: 1.5rem;
   font-weight: semibold;
+  border: 0;
+  background-color: transparent;
 }
 
 h1.app-title {
@@ -100,4 +102,17 @@ button.redirect-login {
 
 button.redirect-login:hover {
   color: rgb(34, 107, 180);
+}
+
+img.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+div.sticky-btn {
+  position: sticky;
+  top: 0;
 }

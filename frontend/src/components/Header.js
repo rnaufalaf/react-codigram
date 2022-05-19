@@ -2,14 +2,20 @@ import React from "react";
 import { BsSearch } from "react-icons/bs";
 import "../App.css";
 
+import { useNavigate } from "react-router-dom";
+
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <nav class="navbar navbar-expand-lg bg-primary">
         <div class="container-fluid">
-          <h2 class="header-title text-white" href="#">
+          <button
+            class="header-title text-white"
+            onClick={() => navigate("/home/posts")}
+          >
             Codigram
-          </h2>
+          </button>
           <button
             class="navbar-toggler"
             type="button"
@@ -28,24 +34,39 @@ const Header = () => {
               placeholder="Search"
               aria-label="Search"
             />
-            <button class="btn btn-primary border border-light" type="submit">
+            <button
+              class="btn btn-primary border border-light"
+              type="button"
+              onClick={() => navigate("/home/searchResults")}
+            >
               <BsSearch />
             </button>
           </form>
           <div class="header-menu">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">
-                  My Profile
-                </a>
+                <button
+                  class="btn btn-primary"
+                  onClick={() => navigate("/home/account")}
+                >
+                  My Account
+                </button>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">
+                <button
+                  class="btn btn-primary"
+                  onClick={() => navigate("/home/myPosts")}
+                >
                   My Posts
-                </a>
+                </button>
               </li>
               <li class="nav-item px-4">
-                <button class="btn btn-primary">Logout</button>
+                <button
+                  class="btn btn-primary"
+                  onClick={() => navigate("/login")}
+                >
+                  Logout
+                </button>
               </li>
             </ul>
           </div>
