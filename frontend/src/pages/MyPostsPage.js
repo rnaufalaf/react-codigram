@@ -1,66 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { getPostsByUserId } from "../redux/actions/postActions";
 import { PostCard } from "../components";
-import "../App.css";
+
 import { useNavigate } from "react-router-dom";
 
 const MyPostsPage = () => {
+  const {
+    getPostsByUserIdResult,
+    getPostsByUserIdLoading,
+    getPostsByUserIdError,
+  } = useSelector((state) => state.PostsReducer);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPostsByUserId(localStorage.getItem("accessToken")));
+  }, [dispatch]);
+
   const navigate = useNavigate();
-  const dummyPost = [
-    {
-      title: "JavaScript for dummies",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a sollicitudin elit. Aenean eget ipsum orci. ",
-      image:
-        "https://academy.alterra.id/blog/wp-content/uploads/2021/07/Logo-Javascript.png",
-      username: "john123",
-      avatar: "https://www.w3schools.com/howto/img_avatar.png",
-    },
-    {
-      title: "JavaScript for dummies",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a sollicitudin elit. Aenean eget ipsum orci. ",
-      image:
-        "https://academy.alterra.id/blog/wp-content/uploads/2021/07/Logo-Javascript.png",
-      username: "john123",
-      avatar: "https://www.w3schools.com/howto/img_avatar.png",
-    },
-    {
-      title: "JavaScript for dummies",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a sollicitudin elit. Aenean eget ipsum orci. ",
-      image:
-        "https://academy.alterra.id/blog/wp-content/uploads/2021/07/Logo-Javascript.png",
-      username: "john123",
-      avatar: "https://www.w3schools.com/howto/img_avatar.png",
-    },
-    {
-      title: "JavaScript for dummies",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a sollicitudin elit. Aenean eget ipsum orci. ",
-      image:
-        "https://academy.alterra.id/blog/wp-content/uploads/2021/07/Logo-Javascript.png",
-      username: "john123",
-      avatar: "https://www.w3schools.com/howto/img_avatar.png",
-    },
-    {
-      title: "JavaScript for dummies",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a sollicitudin elit. Aenean eget ipsum orci. ",
-      image:
-        "https://academy.alterra.id/blog/wp-content/uploads/2021/07/Logo-Javascript.png",
-      username: "john123",
-      avatar: "https://www.w3schools.com/howto/img_avatar.png",
-    },
-    {
-      title: "JavaScript for dummies",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a sollicitudin elit. Aenean eget ipsum orci. ",
-      image:
-        "https://academy.alterra.id/blog/wp-content/uploads/2021/07/Logo-Javascript.png",
-      username: "john123",
-      avatar: "https://www.w3schools.com/howto/img_avatar.png",
-    },
-  ];
+
   return (
     <div class="px-5 py-4">
       <div class="row">
@@ -79,9 +38,19 @@ const MyPostsPage = () => {
         </div>
       </div>
       <div class="row py-2 ">
-        {dummyPost.map((post) => {
-          return <PostCard post={post} />;
-        })}
+        {getPostsByUserIdResult ? (
+          getPostsByUserIdResult.map((post) => {
+            return <PostCard data={post} />;
+          })
+        ) : getPostsByUserIdLoading ? (
+          <p>Loading...</p>
+        ) : getPostsByUserIdError ? (
+          <p>
+            {getPostsByUserIdError ? getPostsByUserIdError : "Posts List Empty"}
+          </p>
+        ) : (
+          console.log("get to reducers")
+        )}
       </div>
     </div>
   );

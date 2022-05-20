@@ -9,7 +9,7 @@ export const ADD_POST = "ADD_POST";
 export const EDIT_POST = "EDIT_POST";
 export const DELETE_POST = "DELETE_POST";
 
-export const getPost = (postId) => {
+export const getPost = (postId, accessToken) => {
   return (dispatch) => {
     dispatch({
       type: GET_POST,
@@ -23,6 +23,9 @@ export const getPost = (postId) => {
     axios({
       method: "GET",
       url: `${url}/posts/details/${postId}`,
+      headers: {
+        accesstoken: accessToken,
+      },
     })
       .then((res) => {
         dispatch({

@@ -1,10 +1,38 @@
-import React from "react";
-import "../App.css";
-
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../fetchs/userFetch";
+import "../App.css";
+import Swal from "sweetalert2";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  const submitHandler = async () => {
+    const res = await loginUser(form);
+    if (res === "success") {
+      Swal.fire({
+        icon: "success",
+        title: "Login Success!",
+        text: `You've logged in to your acoount!`,
+        footer: "Happy Surfing!",
+      });
+      navigate("/home/posts");
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops....",
+        text: `Login Failed!`,
+        footer:
+          "It seems like you've entered the wrong credentials. Please try again!",
+      });
+    }
+  };
+
   return (
     <div class="login-container">
       <div class="row">
@@ -20,19 +48,33 @@ const LoginPage = () => {
                   <label for="email" class="form-label">
                     Email
                   </label>
-                  <input type="email" class="form-control" id="email" />
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    onChange={(event) =>
+                      setForm({ ...form, email: event.target.value })
+                    }
+                  />
                 </div>
                 <div class="mb-3">
                   <label for="password" class="form-label">
                     Password
                   </label>
-                  <input type="password" class="form-control" id="password" />
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    onChange={(event) =>
+                      setForm({ ...form, password: event.target.value })
+                    }
+                  />
                 </div>
                 <div align="center">
                   <button
                     type="button"
                     class="login-button"
-                    onClick={() => navigate("/home/posts")}
+                    onClick={submitHandler}
                   >
                     Submit
                   </button>

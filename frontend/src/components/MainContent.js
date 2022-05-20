@@ -22,7 +22,7 @@ const MainContent = () => {
       <Route path="/editUser" element={<EditUserPage />} />
       <Route path="/editPost" element={<EditPostPage />} />
       <Route path="/myPosts" element={<MyPostsPage />} />
-      <Route path="/details" element={<PostDetailsPage />} />
+      <Route path="/details/:id" element={<PostDetailsPage />} />
     </Routes>
   );
 };
