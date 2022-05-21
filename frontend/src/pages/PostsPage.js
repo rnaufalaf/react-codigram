@@ -5,8 +5,6 @@ import { getPosts } from "../redux/actions/postActions";
 import { getUserDetails } from "../redux/actions/userActions";
 import { PostCard } from "../components";
 
-import { useNavigate } from "react-router-dom";
-
 const PostsPage = () => {
   const { getPostsResult, getPostsLoading, getPostsError } = useSelector(
     (state) => state.PostsReducer
@@ -48,7 +46,10 @@ const PostsPage = () => {
             {getUserDetailsResult ? (
               <div class="row">
                 <div class="col-sm-2">
-                  <img class="avatar" src={getUserDetailsResult.image} />
+                  <img
+                    class="avatar"
+                    src={require(`../images/${getUserDetailsResult.image}`)}
+                  />
                 </div>
                 <div class="col-sm-6">
                   <strong>

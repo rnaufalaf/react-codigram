@@ -16,11 +16,11 @@ const MainContent = () => {
   return (
     <Routes>
       <Route path="/posts" element={<PostsPage />} />
-      <Route path="/searchResults" element={<SearchedPostsPage />} />
+      <Route path="/search/:query" element={<SearchedPostsPage />} />
       <Route path="/account" element={<AccountPage />} />
       <Route path="/add" element={<AddPostPage />} />
       <Route path="/editUser" element={<EditUserPage />} />
-      <Route path="/editPost" element={<EditPostPage />} />
+      <Route path="/editPost/:id" element={<EditPostPage />} />
       <Route path="/myPosts" element={<MyPostsPage />} />
       <Route path="/details/:id" element={<PostDetailsPage />} />
     </Routes>

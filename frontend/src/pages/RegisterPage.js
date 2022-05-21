@@ -1,10 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
+import Swal from "sweetalert2";
 import "../App.css";
 
 import { useNavigate } from "react-router-dom";
+import { uploadImage, registerUser } from "../fetchs/userFetch";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [country, setCountry] = useState("");
+  const [imageData, setImageData] = useState({});
+
+  const handleItemUpload = (event) => {
+    setImageData(event.target.files[0]);
+  };
+
+  const register = (imageName) => {
+    const postObj = {
+      email,
+      username,
+      password,
+      phone,
+      country,
+      image: Math.round(new Date() / 1000) + "--" + imageName,
+    };
+    registerUser(postObj);
+    Swal.fire({
+      icon: "success",
+      title: "Register User Success!",
+      text: `You've successfully created an account!`,
+      footer: "Please continue login process in the Login Page",
+    });
+    navigate("/login");
+  };
+
+  const submitDataHandler = () => {
+    const data = new FormData();
+    data.append("image", imageData);
+    uploadImage(data);
+    register(imageData.name);
+  };
   return (
     <div class="register-container">
       <div class="row">
@@ -19,37 +57,72 @@ const RegisterPage = () => {
                 <label for="email" class="form-label">
                   Email
                 </label>
-                <input type="email" class="form-control" id="email" />
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  onChange={(event) => setEmail(event.target.value)}
+                />
               </div>
               <div class="mb-3">
                 <label for="username" class="form-label">
                   Username
                 </label>
-                <input type="text" class="form-control" id="username" />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="username"
+                  onChange={(event) => setUsername(event.target.value)}
+                />
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label">
                   Password
                 </label>
-                <input type="password" class="form-control" id="password" />
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  onChange={(event) => setPassword(event.target.value)}
+                />
               </div>
               <div class="mb-3">
                 <label for="phone" class="form-label">
                   Phone
                 </label>
-                <input type="text" class="form-control" id="phone" />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="phone"
+                  onChange={(event) => setPhone(event.target.value)}
+                />
               </div>
               <div class="mb-3">
                 <label for="country" class="form-label">
                   Country
                 </label>
-                <input type="text" class="form-control" id="country" />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="country"
+                  onChange={(event) => setCountry(event.target.value)}
+                />
+              </div>
+              <div class="form-group py-3">
+                <label for="image">Upload Photo</label>
+                <input
+                  class="form-control"
+                  type="file"
+                  name="image"
+                  accept="image/png, image/gif, image/jpeg"
+                  onChange={handleItemUpload}
+                />
               </div>
               <div align="center">
                 <button
                   type="button"
                   class="login-button"
-                  onClick={() => navigate("/login")}
+                  onClick={submitDataHandler}
                 >
                   Submit
                 </button>

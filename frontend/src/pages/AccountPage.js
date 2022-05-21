@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { BsPencilSquare } from "react-icons/bs";
 import { getUserDetails } from "../redux/actions/userActions";
 
 import { useNavigate } from "react-router-dom";
@@ -24,14 +25,29 @@ const AccountPage = () => {
           <div class="col">
             <div style={{ height: "50vh", width: "25vw" }}>
               <img
-                src={getUserDetailsResult.image}
+                src={require(`../images/${getUserDetailsResult.image}`)}
                 style={{ height: "16rem" }}
               />
             </div>
           </div>
           <div class="col">
             <div style={{ height: "50vh", width: "50vw" }}>
-              <h5>Personal Informations</h5>
+              <div class="row">
+                <div class="col-4">
+                  <h5>Personal Informations</h5>
+                </div>
+                <div class="col">
+                  <button
+                    style={{
+                      border: 0,
+                      backgroundColor: "transparent",
+                    }}
+                    onClick={() => navigate("/home/editUser")}
+                  >
+                    <BsPencilSquare />
+                  </button>
+                </div>
+              </div>
               <hr />
               <div class="row">
                 <div class="col-sm-2">
@@ -66,17 +82,7 @@ const AccountPage = () => {
                 </div>
               </div>
               <div class="row">
-                <div class="col-sm-2">
-                  <button
-                    class="btn btn-primary"
-                    onClick={() => navigate("/home/editUser")}
-                  >
-                    Edit
-                  </button>
-                </div>
-                <div class="col-sm-4">
-                  <button class="btn btn-danger">Delete</button>
-                </div>
+                <div class="col-sm-2"></div>
               </div>
             </div>
           </div>

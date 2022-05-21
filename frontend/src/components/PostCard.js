@@ -7,7 +7,7 @@ const PostCard = (props) => {
   return (
     <div class="card my-2 shadow-sm" style={{ width: "30rem" }}>
       <div style={{ flexDirection: "column", height: "2rem" }}>
-        <img class="avatar" src={data.User.image} />
+        <img class="avatar" src={require(`../images/${data.User.image}`)} />
         <strong>
           <medium class="px-2">{data.User.username}</medium>
         </strong>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import "../App.css";
 
@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
+
+  const [searchQuery, setSearchQuery] = useState("");
   return (
     <div>
       <nav class="navbar navbar-expand-lg bg-primary">
@@ -33,11 +35,12 @@ const Header = () => {
               type="search"
               placeholder="Search"
               aria-label="Search"
+              onChange={(event) => setSearchQuery(event.target.value)}
             />
             <button
               class="btn btn-primary border border-light"
               type="button"
-              onClick={() => navigate("/home/searchResults")}
+              onClick={() => navigate(`/home/search/${searchQuery}`)}
             >
               <BsSearch />
             </button>

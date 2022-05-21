@@ -78,6 +78,7 @@ div.register-form-container {
   height: 100vh;
   width: 50vw;
   background-color: white;
+  overflow: scroll;
 }
 
 button.register-button {

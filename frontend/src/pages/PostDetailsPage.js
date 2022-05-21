@@ -69,7 +69,7 @@ const PostDetailsPage = () => {
                           <div class="col-md-1">
                             <button
                               class="btn btn-primary"
-                              onClick={() => navigate("/home/editPost")}
+                              onClick={() => navigate(`/home/editPost/${id}`)}
                             >
                               <BsPencilSquare />
                             </button>
