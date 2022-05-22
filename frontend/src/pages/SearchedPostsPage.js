@@ -35,7 +35,7 @@ const SearchedPostsPage = () => {
         ) : getPostsError ? (
           getPostsError
         ) : (
-          "Post not found"
+          <h1>Post not found</h1>
         )}
       </div>
     </div>

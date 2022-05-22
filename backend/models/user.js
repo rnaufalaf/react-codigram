@@ -39,6 +39,7 @@ module.exports = (sequelize, DataTypes) => {
       hooks: {
         beforeCreate: (user, options) => {
           user.password = encrypt(user.password);
+          user.image = "300.png";
         },
         beforeUpdate: (user, options) => {
           user.password = encrypt(user.password);

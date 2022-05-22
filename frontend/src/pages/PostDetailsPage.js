@@ -20,6 +20,29 @@ const PostDetailsPage = () => {
     dispatch(getPost(+id, accessToken));
   }, [dispatch]);
 
+  const handleDeletePost = () => {
+    Swal.fire({
+      icon: "question",
+      title: "Do you want to delete the Post?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Delete",
+      denyButtonText: `Don't delete`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deletePost(accessToken, getPostResult.post.id));
+        Swal.fire({
+          icon: "success",
+          title: "Delete Post Success!",
+          text: `You've successfully deleted this post!`,
+        });
+        navigate("/home/myPosts");
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
+    });
+  };
+
   return (
     <div class="py-3">
       <h5 align="center" class="py-1">
@@ -51,17 +74,7 @@ const PostDetailsPage = () => {
                           <div class="col-md-1 mx-5">
                             <button
                               class="btn btn-danger"
-                              onClick={() => {
-                                dispatch(
-                                  deletePost(accessToken, getPostResult.post.id)
-                                );
-                                Swal.fire({
-                                  icon: "success",
-                                  title: "Delete Post Success!",
-                                  text: `You've successfully deleted this post!`,
-                                });
-                                navigate("/home/myPosts");
-                              }}
+                              onClick={handleDeletePost}
                             >
                               <BsFillTrashFill />
                             </button>
