@@ -1,6 +1,6 @@
 # react-codigram
 
-A social media designed for users to share articles and thoughts related to the Programming World. The app is powered with React with help of Bootstrap 5.2 to make the overall layout and components in the front-end side, and Node.js with Express.js to build the server-side of the project, also utilizing Sequelize ORM and PostgreSQL to build the database environment. This project also utilizes Redux for maintaining state throughout the app.
+A social media designed for users to share articles and thoughts related to the Programming World. The app is powered with React with help of Bootstrap to make the overall layout and components in the front-end side, and Node.js with Express.js to build the server-side of the project, also utilizing Sequelize ORM and PostgreSQL to build the database environment. This project also utilizes Redux for maintaining state throughout the app.
 
 This is the ERD representation of the project
 
