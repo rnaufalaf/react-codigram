@@ -16,6 +16,7 @@ class UserController {
       });
       res.status(201).json(result);
     } catch (err) {
+      console.log(err);
       res.status(500).json({ message: "Register user failed", err });
     }
   }
@@ -36,6 +37,7 @@ class UserController {
         });
       }
     } catch (err) {
+      console.log(err);
       res.status(500).json({ message: "Login failed", err });
     }
   }

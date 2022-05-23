@@ -53,10 +53,7 @@ const PostDetailsPage = () => {
           <div class="row py-3">
             <div class="col">
               <div style={{ height: "80vh", width: "38vw" }}>
-                <img
-                  src={require(`../images/${getPostResult.post.image}`)}
-                  style={{ height: "33rem" }}
-                />
+                <img src={require(`../images/${getPostResult.post.image}`)} />
               </div>
             </div>
             <div class="col overflow-scroll">
